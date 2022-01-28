@@ -6,7 +6,7 @@ def call (){
 			STAGE = ''
 		}
 		
-		parameters{ string(name: 'stage', defaultValue: '' )}
+		parameters{ string(name: 'STAGE2', defaultValue: '' )}
 
 		stages {
 			stage('pipeline'){
@@ -16,7 +16,7 @@ def call (){
 						println params.buildTool
 						
 
-						if (params.stage=='gradle') {
+						if (params.STAGE2=='gradle') {
 								gradle()
 						} else {
 								def ejecucion = load 'maven.groovy'
