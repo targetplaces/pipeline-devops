@@ -6,7 +6,7 @@ def call (){
 			STAGE = ''
 		}
 		
-		parameters([ string(name: 'stage', defaultValue: '' )])
+		parameters{ string(name: 'stage', defaultValue: '' )}
 
 		stages {
 			stage('pipeline'){
