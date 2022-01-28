@@ -13,15 +13,10 @@ def call (){
 				steps{
 					script{
 						println 'pipeline'
-						println params.STAGE2
+						println params.STAGE
 						
-
-						if (params.STAGE2=='gradle') {
 							println 'opcion1'
-								gradle()
-						} else {
-							println 'opcion1'
-						}
+								gradle(params.STAGE)
 
 
 					}
