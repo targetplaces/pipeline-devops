@@ -6,9 +6,7 @@ def call (){
 			STAGE = ''
 		}
 		
-		parameters {
-		  choice choices: ['gradle', 'maven'], description: 'indicar herramienta de construcción', name: 'buildTool'
-		}
+		properties([parameters([text('stage')])])
 
 		stages {
 			stage('pipeline'){
@@ -18,7 +16,7 @@ def call (){
 						println params.buildTool
 						
 
-						if (params.buildTool=='gradle') {
+						if (params.stage=='gradle') {
 								gradle()
 						} else {
 								def ejecucion = load 'maven.groovy'
