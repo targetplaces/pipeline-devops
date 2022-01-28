@@ -1,6 +1,6 @@
 def call(){
   
-stage('BuildTestJar'){
+stage('build'){
 
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
