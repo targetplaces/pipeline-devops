@@ -13,14 +13,14 @@ def call (){
 				steps{
 					script{
 						println 'pipeline'
-						println params.buildTool
+						println params.STAGE2
 						
 
 						if (params.STAGE2=='gradle') {
+							println 'opcion1'
 								gradle()
 						} else {
-								def ejecucion = load 'maven.groovy'
-								maven()
+							println 'opcion1'
 						}
 
 
