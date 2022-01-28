@@ -6,7 +6,7 @@ def call (){
 			STAGE = ''
 		}
 		
-		properties([parameters([text('stage')])])
+		options([parameters([text('stage')])])
 
 		stages {
 			stage('pipeline'){
