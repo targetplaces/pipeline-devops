@@ -1,9 +1,11 @@
-def call(String pipelineType){
+def call(String STAGE){
   
   figlet pipelineType
   
-stage('BuildTestJar'){
-
+	stage('BuildTestJar'){
+            when {
+                expression { myStage == 'Stage1' }
+            }
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					sh "chmod +x gradlew"
