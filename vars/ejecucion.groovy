@@ -1,4 +1,4 @@
-def call {
+def call (){
 	pipeline {
 		agent any
 		
@@ -6,15 +6,14 @@ def call {
 			STAGE = ''
 		}
 		
-		parameters {
-		  choice choices: ['gradle', 'maven'], description: 'indicar herramienta de construcción', name: 'buildTool'
-		}
+		parameters{ string(name: 'STAGE2', defaultValue: '' )}
 
 		stages {
 			stage('pipeline'){
 				steps{
 					script{
 						println 'pipeline'
+<<<<<<< HEAD
 						
 
 						if (params.buildTool=='gradle') {
@@ -23,6 +22,12 @@ def call {
 								def ejecucion = load 'maven.groovy'
 								maven(verifyBranchName())
 						}
+=======
+						println params.STAGE
+						
+							println 'opcion1'
+								gradle(params.STAGE)
+>>>>>>> 2a552f78a3797b78d8f35304a160dda55f007bb3
 
 
 					}
@@ -32,14 +37,15 @@ def call {
 		}
 		post {
 			success{
-				slackSend(color: 'good', channel: "U02MBA9FXHD", message: "[${env.BUILD_USER}][${env.JOB_NAME}][${params.buildTool}] Ejecución Exitosa.")
+				slackSend(color: 'good', channel: "U02MBA9FXHD", message: "[${env.BUILD_USER}][${env.JOB_NAME}][${params.STAGE2}] Ejecución Exitosa.")
 			}
 			failure {
-				slackSend(color: 'danger', channel: "U02MBA9FXHD", message: "[${env.BUILD_USER}][${env.JOB_NAME}][${params.buildTool}] Ejecución fallida en Stage: ${STAGE}")
+				slackSend(color: 'danger', channel: "U02MBA9FXHD", message: "[${env.BUILD_USER}][${env.JOB_NAME}][${params.STAGE2}] Ejecución fallida en Stage: ${STAGE}")
 			}
 		}
 	}
 }
+<<<<<<< HEAD
 
 def verifyBranchName()
 {
@@ -52,3 +58,6 @@ def verifyBranchName()
 	}
 }
 return this;
+=======
+return this;
+>>>>>>> 2a552f78a3797b78d8f35304a160dda55f007bb3
