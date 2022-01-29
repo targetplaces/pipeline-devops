@@ -22,13 +22,6 @@ def call (){
 								def ejecucion = load 'maven.groovy'
 								maven(verifyBranchName())
 						}
-=======
-						println params.STAGE
-						
-							println 'opcion1'
-								gradle(params.STAGE)
->>>>>>> 2a552f78a3797b78d8f35304a160dda55f007bb3
-
 
 					}
 				}
@@ -58,6 +51,4 @@ def verifyBranchName()
 	}
 }
 return this;
-=======
-return this;
->>>>>>> 2a552f78a3797b78d8f35304a160dda55f007bb3
+
