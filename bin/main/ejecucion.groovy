@@ -53,7 +53,7 @@ def isStageValido(pipeline){
 						pipeline.tokenize(",").each { stage ->
 							if(!stage.equals(instancia[i])){
 								println stage
-								estado = true
+								estado = false
 							}
 			
 						}
