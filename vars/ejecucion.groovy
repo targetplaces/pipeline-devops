@@ -4,8 +4,8 @@ def call (){
 		
 		environment {
 			STAGE = ''
-			GRADLEPIPELINE = ['BuildTestJar', 'Sonar', 'run', 'Nexus']
-			MAVENPIPELINE = ['Build', 'Sonar', 'run', 'Nexus']
+			GRADLEPIPELINE = "BuildTestJar,Sonar,run,Nexus"
+			MAVENPIPELINE = "Build,Sonar,run,Nexus"
 		}
 		
 		parameters{ string(name: 'STAGE', defaultValue: '' )}
@@ -20,19 +20,11 @@ def call (){
 					script{
 						println 'pipeline'
 
-						def instancia = params.STAGE.split(';')
-
-						for (int i = 0; i < instancia.length; i++) {
-							for (int j = 0; j < pipeline.length; j++) {
-								if(!instancia[i].equals(pipeline[i])){
-									println 'No existe el STAGE ${isntancia[i]}'
-									return false;
-								}
-							}
-						}
 						if (params.buildTool=='gradle') {
+								isStageValido(GRADLEPIPELINE)
 								gradle(params.STAGE)
 						} else {
+								isStageValido(MAVENPIPELINE)
 								maven(params.STAGE)
 						}
 
@@ -51,5 +43,21 @@ def call (){
 		}
 	}
 }
+
+def isStageValido(pipeline){
+	
+	def instancia = params.STAGE.split(';')
+
+		for (int i = 0; i < instancia.length; i++) {
+			
+						pipeline.tokenize(",").each { stage ->
+							if(!stage.equals(pipeline[i])){
+								return false;
+							}
+			
+						}
+		}
+	}
+
 
 return this;
