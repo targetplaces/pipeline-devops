@@ -49,9 +49,10 @@ def isStageValido(pipeline){
 	def instancia = params.STAGES.split(';')
 
 		for (int i = 0; i < instancia.length; i++) {
-			
+			println instancia[i]
 						pipeline.tokenize(",").each { stage ->
 							if(!stage.equals(instancia[i])){
+								println stage
 								return false;
 							}
 			
