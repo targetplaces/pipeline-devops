@@ -9,7 +9,7 @@ def call (){
 		}
 
 		parameters {
-			string(name: 'STAGE', defaultValue: '' )
+			string(name: 'STAGES', defaultValue: '' )
 			choice choices: ['gradle', 'maven'], description: 'indicar herramienta de construcción', name: 'buildTool'
 		}
 
@@ -34,10 +34,10 @@ def call (){
 		}
 		post {
 			success{
-				slackSend(color: 'good', channel: "U02MBA9FXHD", message: "[${env.BUILD_USER}][${env.JOB_NAME}][${params.STAGE}] Ejecución Exitosa.")
+				slackSend(color: 'good', channel: "U02MBA9FXHD", message: "[${env.BUILD_USER}][${env.JOB_NAME}][${params.STAGES}] Ejecución Exitosa.")
 			}
 			failure {
-				slackSend(color: 'danger', channel: "U02MBA9FXHD", message: "[${env.BUILD_USER}][${env.JOB_NAME}][${params.STAGE}] Ejecución fallida en Stage: ${STAGE}")
+				slackSend(color: 'danger', channel: "U02MBA9FXHD", message: "[${env.BUILD_USER}][${env.JOB_NAME}][${params.STAGES}] Ejecución fallida en Stage: ${STAGE}")
 			}
 		}
 	}
@@ -45,12 +45,13 @@ def call (){
 
 def isStageValido(pipeline){
 	
-	def instancia = params.STAGE.split(';')
+	println "Ejecutando funcion: isStageValido"
+	def instancia = params.STAGES.split(';')
 
 		for (int i = 0; i < instancia.length; i++) {
 			
 						pipeline.tokenize(",").each { stage ->
-							if(!stage.equals(pipeline[i])){
+							if(!stage.equals(instancia[i])){
 								return false;
 							}
 			
