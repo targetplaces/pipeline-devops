@@ -1,6 +1,6 @@
 def call(String STAGE){
   
-  figlet pipelineType
+  figlet STAGE
   
 	stage('BuildTestJar'){
             when {
