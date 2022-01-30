@@ -3,9 +3,9 @@ def call(String STAGE){
   figlet STAGE
   
 	stage('BuildTestJar'){
-        //    when {
-        //        expression { myStage == 'Stage1' }
-        //    }
+            when {
+                expression { STAGE.contains('BuildTestJar') }
+            }
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					sh "chmod +x gradlew"
@@ -13,6 +13,9 @@ def call(String STAGE){
 
 		}
 		stage('Sonar'){
+			     when {
+                	expression { STAGE.contains('Sonar') }
+           		 }
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					    def scannerHome = tool 'sonar-scanner';
@@ -21,7 +24,9 @@ def call(String STAGE){
 					    }
 		}
 		stage('run'){
-
+			     when {
+                	expression { STAGE.contains('run') }
+           		 }
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					sh "nohup bash gradlew bootRun &"
@@ -29,6 +34,9 @@ def call(String STAGE){
 
 		}
 		stage('Test'){
+					when {
+                		expression { STAGE.contains('Test') }
+           			 }
 
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
@@ -36,7 +44,9 @@ def call(String STAGE){
 
 		}
 		stage('Nexus'){
-
+					when {
+                		expression { STAGE.contains('Nexus') }
+           			 }
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					nexusPublisher nexusInstanceId: 'nexus',

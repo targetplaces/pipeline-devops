@@ -4,8 +4,8 @@ def call (){
 		
 		environment {
 			STAGE = ''
-			GRADLEPIPELINE = "BuildTestJar,Sonar,run,Nexus"
-			MAVENPIPELINE = "Build,Sonar,run,Nexus"
+			GRADLEPIPELINE = "BuildTestJar;Sonar;run;Nexus"
+			MAVENPIPELINE = "Build;Sonar;run;Nexus"
 		}
 
 		parameters {
@@ -46,11 +46,16 @@ def call (){
 def isStageValido(pipeline){
 	
 	println "Ejecutando funcion: isStageValido"
-	def instancia = params.STAGES.split(';')
+	if (params.STAGES.isEmpty())
+		params.STAGES = pipeline
+	else
+		def instancia = params.STAGES.split(';')
+
     def estado = true
+	
 		for (int i = 0; i < instancia.length; i++) {
 			println instancia[i]
-						pipeline.tokenize(",").each { stage ->
+						pipeline.tokenize(";").each { stage ->
 							if(!stage.equals(instancia[i])){
 								println stage
 								estado = false
