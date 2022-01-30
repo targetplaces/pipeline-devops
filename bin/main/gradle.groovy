@@ -3,9 +3,9 @@ def call(String STAGE){
   figlet STAGE
   
 	stage('BuildTestJar'){
-            when {
-                expression { myStage == 'Stage1' }
-            }
+        //    when {
+        //        expression { myStage == 'Stage1' }
+        //    }
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					sh "chmod +x gradlew"
