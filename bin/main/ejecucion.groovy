@@ -4,8 +4,8 @@ def call (){
 		
 		environment {
 			STAGE = ''
-			gradlePipeline = ['BuildTestJar', 'Sonar', 'run', 'Nexus']
-			mavenPipeline = ['Build', 'Sonar', 'run', 'Nexus']
+			GRADLEPIPELINE = ['BuildTestJar', 'Sonar', 'run', 'Nexus']
+			MAVENPIPELINE = ['Build', 'Sonar', 'run', 'Nexus']
 		}
 		
 		parameters{ string(name: 'STAGE', defaultValue: '' )}
