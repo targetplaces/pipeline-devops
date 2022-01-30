@@ -20,11 +20,11 @@ def call (){
 						println 'pipeline'
 
 						if (params.buildTool=='gradle') {
-								isStageValido(GRADLEPIPELINE)
-								gradle(params.STAGE)
+								if(isStageValido(GRADLEPIPELINE))
+									gradle(params.STAGE)
 						} else {
-								isStageValido(MAVENPIPELINE)
-								maven(params.STAGE)
+								if(isStageValido(MAVENPIPELINE))
+									maven(params.STAGE)
 						}
 
 					}
@@ -47,17 +47,19 @@ def isStageValido(pipeline){
 	
 	println "Ejecutando funcion: isStageValido"
 	def instancia = params.STAGES.split(';')
-
+    def estado = true
 		for (int i = 0; i < instancia.length; i++) {
 			println instancia[i]
 						pipeline.tokenize(",").each { stage ->
 							if(!stage.equals(instancia[i])){
 								println stage
-								return false;
+								estado = true
 							}
 			
 						}
 		}
+
+	return estado;
 	}
 
 
