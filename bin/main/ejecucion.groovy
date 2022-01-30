@@ -7,11 +7,10 @@ def call (){
 			GRADLEPIPELINE = "BuildTestJar,Sonar,run,Nexus"
 			MAVENPIPELINE = "Build,Sonar,run,Nexus"
 		}
-		
-		parameters{ string(name: 'STAGE', defaultValue: '' )}
-		
+
 		parameters {
-		choice choices: ['gradle', 'maven'], description: 'indicar herramienta de construcción', name: 'buildTool'
+			string(name: 'STAGE', defaultValue: '' )
+			choice choices: ['gradle', 'maven'], description: 'indicar herramienta de construcción', name: 'buildTool'
 		}
 
 		stages {
