@@ -21,10 +21,16 @@ def call (){
 						if (params.buildTool=='gradle') {
 
 								if(isStageValido(GRADLEPIPELINE))
-									gradle(if(params.STAGES.isEmpty()) GRADLEPIPELINE else params.STAGES)							
+									if(params.STAGES.isEmpty())
+										gradle(GRADLEPIPELINE)	
+									else 			
+										gradle(params.STAGES)			
 						} else {
 								if(isStageValido(MAVENPIPELINE))
-									maven(env.STAGE)
+									if(params.STAGES.isEmpty())
+										maven(MAVENPIPELINE)	
+									else 			
+										maven(params.STAGES)
 						}
 
 					}
