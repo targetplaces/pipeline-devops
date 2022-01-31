@@ -20,7 +20,6 @@ def call (){
 
 						if (params.buildTool=='gradle') {
 							println "RESULTADO: "
-							println isStageValido(GRADLEPIPELINE)
 
 								if(isStageValido(GRADLEPIPELINE))
 									gradle(params.STAGES)
