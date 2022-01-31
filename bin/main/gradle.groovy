@@ -4,8 +4,8 @@ def call(String STAGE){
   
 	stage('BuildTestJar'){
             when {
-                expression { STAGE.contains('BuildTestJar') }
-            }
+                expression { return STAGE.contains('BuildTestJar') }
+            	}
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					sh "chmod +x gradlew"
