@@ -46,7 +46,7 @@ def call (){
 def isStageValido(pipeline){
 	
 	String instancia = ''
-
+	def estado = false
 	println "Ejecutando funcion: isStageValido"
 	if (params.STAGES.isEmpty())
 		instancia = pipeline
@@ -57,13 +57,14 @@ def isStageValido(pipeline){
 			
 	instancia.tokenize(";").each { paramStage ->
 	println paramStage
-		def estado = false		    
+				    
 		pipeline.tokenize(";").each { stage ->
 			if(stage.equals(paramStage)){
 				estado = true
 			}	
 		}
 		if(!estado) return
+
 	}
 
 	return estado;
