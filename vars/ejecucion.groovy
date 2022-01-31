@@ -6,7 +6,6 @@ def call (){
 			STAGE = ''
 			GRADLEPIPELINE = "BuildJar;Sonar;run;Nexus"
 			MAVENPIPELINE = "Build;Sonar;run;Nexus"
-			instancia = ""
 		}
 
 		parameters {
@@ -22,10 +21,10 @@ def call (){
 						if (params.buildTool=='gradle') {
 
 								if(isStageValido(GRADLEPIPELINE))
-									gradle(env.instancia)
+									gradle(env.STAGE)
 						} else {
 								if(isStageValido(MAVENPIPELINE))
-									maven(env.instancia)
+									maven(env.STAGE)
 						}
 
 					}
@@ -48,17 +47,20 @@ def isStageValido(pipeline){
 	
 	
 	String [] ejecutarStage = pipeline.split(";");
+	String [] instancia = []
 
-	if (params.STAGES.isEmpty())
-		env.instancia = ejecutarStage;
+	if (params.STAGES.isEmpty()){
+		instancia = ejecutarStage;
+		env.STAGE = pipeline
+	}
 	else
-		env.instancia = params.STAGES.split(";");
+		instancia = params.STAGES.split(";");
 
 	println "STAGES:"
-	println env.instancia
-	
-    if (ejecutarStage.findAll { e -> env.instancia.contains( e ) }.size() == 0) {
-        println 'ERROR EN STAGES INGRESADAS: STAGES VALIDAS: ' + ejecutarStage.join(', ') + '. STAGE INGRESADAS: ' + env.instancia.join(', ')
+	println instancia
+
+    if (ejecutarStage.findAll { e -> instancia.contains( e ) }.size() == 0) {
+        println 'ERROR EN STAGES INGRESADAS: STAGES VALIDAS: ' + ejecutarStage.join(', ') + '. STAGE INGRESADAS: ' + instancia.join(', ')
 		return false;
     }
 
