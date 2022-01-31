@@ -45,7 +45,7 @@ def call (){
 
 def isStageValido(pipeline){
 	
-	String[] instancia = []
+	String instancia = ''
 
 	println "Ejecutando funcion: isStageValido"
 	if (params.STAGES.isEmpty())
