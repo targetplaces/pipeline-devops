@@ -55,10 +55,10 @@ def isStageValido(pipeline){
 
     def estado = true
 
-		for (int i = 0; i < instancia.length; i++) {
+		for (int i = 0; i < pipeline.length; i++) {
 			println instancia[i]
-						pipeline.tokenize(";").each { stage ->
-							if(!stage.equals(instancia[i])){
+						instancia.tokenize(";").each { stage ->
+							if(!stage.equals(pipeline[i])){
 								println "NO EXISTE STAGE: ${stage}"
 								estado = false
 							}
