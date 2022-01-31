@@ -63,10 +63,11 @@ def isStageValido(pipeline){
 		pipeline.tokenize(";").each { stage ->
 			if(stage.equals(paramStage)){
 				estado = true
+				println "Existe Stage: ${stage}"
 			}	
 		}
 		if(!estado) return
-
+		estado = false
 	}
 
 	return estado;
