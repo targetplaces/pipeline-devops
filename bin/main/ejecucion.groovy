@@ -3,7 +3,7 @@ def call (){
 		agent any
 		
 		environment {
-			STAGE = ''
+			STAGE = ""
 			GRADLEPIPELINE = "BuildJar;Sonar;run;Nexus"
 			MAVENPIPELINE = "Build;Sonar;run;Nexus"
 		}
@@ -54,14 +54,14 @@ def isStageValido(pipeline){
 
 	if (params.STAGES.isEmpty()){
 		instancia = ejecutarStage;
-		env.STAGE = pipeline
+		env.STAGE = pipeline;
 	}
 	else
 		instancia = params.STAGES.split(";");
 
 	println "pipeline: ${pipeline}"
 	println "ENV STAGE: ${env.STAGE}"
-	
+
     if (ejecutarStage.findAll { e -> instancia.contains( e ) }.size() == 0) {
         println 'ERROR EN STAGES INGRESADAS: STAGES VALIDAS: ' + ejecutarStage.join(', ') + '. STAGE INGRESADAS: ' + instancia.join(', ')
 		return false;
