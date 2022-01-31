@@ -53,18 +53,18 @@ def isStageValido(pipeline){
 	else
 		instancia = params.STAGES
 
-    def estado = true
 
-			instancia.tokenize(";").each { paramStage ->
-			println paramStage
-						  pipeline.tokenize(";").each { stage ->
-							if(!stage.equals(paramStage)){
-								println "NO EXISTE STAGE: ${stage}"
-								estado = false
-							}
 			
-						}
+	instancia.tokenize(";").each { paramStage ->
+	println paramStage
+		def estado = false		    
+		pipeline.tokenize(";").each { stage ->
+			if(stage.equals(paramStage)){
+				estado = true
+			}	
 		}
+		if(!estado) return
+	}
 
 	return estado;
 	}
