@@ -48,8 +48,10 @@ def isStageValido(pipeline){
 	String instancia = ''
 	def estado = false
 	println "Ejecutando funcion: isStageValido"
-	if (params.STAGES.isEmpty())
+	if (params.STAGES.isEmpty()){
 		instancia = pipeline
+		println "VACIO"
+	}
 	else
 		instancia = params.STAGES
 
