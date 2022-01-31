@@ -17,7 +17,6 @@ def call (){
 			stage('pipeline'){
 				steps{
 					script{
-						println 'pipeline'
 
 						if (params.buildTool=='gradle') {
 								if(isStageValido(GRADLEPIPELINE))
@@ -48,18 +47,17 @@ def isStageValido(pipeline){
 	String[] instancia = []
 	String [] ejecutarStage = pipeline.split(";");
 
-	if (params.STAGES.isEmpty()){
+	if (params.STAGES.isEmpty())
 		instancia = ejecutarStage;
-	}
 	else
 		instancia = params.STAGES.split(";");
 
     if (ejecutarStage.findAll { e -> instancia.contains( e ) }.size() == 0) {
         println 'ERROR EN STAGES INGRESADAS: STAGES VALIDAS: ' + ejecutarStage.join(', ') + '. STAGE INGRESADAS: ' + instancia.join(', ')
-		return false
+		return false;
     }
 
-	return true
+	return true;
 	}
 
 
