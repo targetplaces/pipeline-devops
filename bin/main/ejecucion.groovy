@@ -50,8 +50,10 @@ def isStageValido(pipeline){
 	String[] instancia = []
 	String [] ejecutarStage = pipeline.split(";");
 
-	if (params.STAGES.isEmpty())
+	if (params.STAGES.isEmpty()){
 		instancia = ejecutarStage;
+		params.STAGES = ejecutarStage:
+	}
 	else
 		instancia = params.STAGES.split(";");
 
