@@ -6,6 +6,7 @@ def call (){
 			STAGE = ''
 			GRADLEPIPELINE = "BuildJar;Sonar;run;Nexus"
 			MAVENPIPELINE = "Build;Sonar;run;Nexus"
+			String[] instancia = []
 		}
 
 		parameters {
@@ -20,12 +21,13 @@ def call (){
 
 						if (params.buildTool=='gradle') {
 							println "RESULTADO: "
+							println instancia
 
 								if(isStageValido(GRADLEPIPELINE))
-									gradle(params.STAGES)
+									gradle(instancia)
 						} else {
 								if(isStageValido(MAVENPIPELINE))
-									maven(params.STAGES)
+									maven(instancia)
 						}
 
 					}
@@ -46,13 +48,11 @@ def call (){
 
 def isStageValido(pipeline){
 	
-	String[] instancia = []
+	
 	String [] ejecutarStage = pipeline.split(";");
 
-	if (params.STAGES.isEmpty()){
+	if (params.STAGES.isEmpty())
 		instancia = ejecutarStage;
-		params.STAGES = ejecutarStage;
-	}
 	else
 		instancia = params.STAGES.split(";");
 

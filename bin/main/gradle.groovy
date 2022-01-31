@@ -1,7 +1,7 @@
 def call(String STAGE){
   
     println STAGE
-  
+
 	if(STAGE.contains('BuildJar'))
 	stage('BuildJar'){
 
