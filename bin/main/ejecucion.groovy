@@ -59,7 +59,9 @@ def isStageValido(pipeline){
 	else
 		instancia = params.STAGES.split(";");
 
-
+	println "pipeline: ${pipeline}"
+	println "ENV STAGE: ${env.STAGE}"
+	
     if (ejecutarStage.findAll { e -> instancia.contains( e ) }.size() == 0) {
         println 'ERROR EN STAGES INGRESADAS: STAGES VALIDAS: ' + ejecutarStage.join(', ') + '. STAGE INGRESADAS: ' + instancia.join(', ')
 		return false;
