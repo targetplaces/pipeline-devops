@@ -46,7 +46,8 @@ def call (){
 def isStageValido(pipeline){
 	
 	String[] instancia = []
-	def estado = false
+	String [] ejecutarStage = pipeline.split(";");
+
 	println "Ejecutando funcion: isStageValido"
 	if (params.STAGES.isEmpty()){
 		instancia = pipeline.split(";");
@@ -54,8 +55,9 @@ def isStageValido(pipeline){
 	else
 		instancia = params.STAGES.split(";");
 
-    if (pipeline.findAll { e -> instancia.contains( e ) }.size() == 0) {
-        throw new Exception('Al menos una stage es inválida. Stages válidas: ' + pipeline.join(', ') + '. Recibe: ' + instancia.join(', '))
+    if (ejecutarStage.findAll { e -> instancia.contains( e ) }.size() == 0) {
+        throw new Exception('Al menos una stage es inválida. Stages válidas: ' + ejecutarStage.join(', ') + '. Recibe: ' + instancia.join(', '))
+		return false
     }
 	/*		
 	instancia.tokenize(";").each { paramStage ->
