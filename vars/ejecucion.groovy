@@ -45,21 +45,23 @@ def call (){
 
 def isStageValido(pipeline){
 	
-	String instancia = ''
+	String[] instancia = []
 	def estado = false
 	println "Ejecutando funcion: isStageValido"
 	if (params.STAGES.isEmpty()){
-		instancia = pipeline
+		instancia = pipeline.split(";");
 		println "VACIO"
 	}
 	else
-		instancia = params.STAGES
+		instancia = params.STAGES.split(";");
 
-
-			
+    if (instancia.findAll { e -> pipeline.contains( e ) }.size() == 0) {
+        throw new Exception('Al menos una stage es inválida. Stages válidas: ' + instancia.join(', ') + '. Recibe: ' + pipeline.join(', '))
+    }
+	/*		
 	instancia.tokenize(";").each { paramStage ->
 	println paramStage
-				    
+		estado = false		    
 		pipeline.tokenize(";").each { stage ->
 			if(stage.equals(paramStage)){
 				estado = true
@@ -67,11 +69,10 @@ def isStageValido(pipeline){
 			}	
 		}
 		if(!estado) return
-		estado = false
 	}
 
 	return estado;
 	}
-
+*/
 
 return this;
