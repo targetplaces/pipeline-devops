@@ -52,7 +52,7 @@ def isStageValido(pipeline){
 
 	if (params.STAGES.isEmpty()){
 		instancia = ejecutarStage;
-		params.STAGES = ejecutarStage:
+		params.STAGES = ejecutarStage;
 	}
 	else
 		instancia = params.STAGES.split(";");
