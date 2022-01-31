@@ -20,14 +20,12 @@ def call (){
 					script{
 
 						if (params.buildTool=='gradle') {
-							println "RESULTADO: "
-							println instancia
 
 								if(isStageValido(GRADLEPIPELINE))
-									gradle(instancia)
+									gradle(env.instancia)
 						} else {
 								if(isStageValido(MAVENPIPELINE))
-									maven(instancia)
+									maven(env.instancia)
 						}
 
 					}
@@ -52,12 +50,12 @@ def isStageValido(pipeline){
 	String [] ejecutarStage = pipeline.split(";");
 
 	if (params.STAGES.isEmpty())
-		instancia = ejecutarStage;
+		env.instancia = ejecutarStage;
 	else
-		instancia = params.STAGES.split(";");
+		env.instancia = params.STAGES.split(";");
 
-    if (ejecutarStage.findAll { e -> instancia.contains( e ) }.size() == 0) {
-        println 'ERROR EN STAGES INGRESADAS: STAGES VALIDAS: ' + ejecutarStage.join(', ') + '. STAGE INGRESADAS: ' + instancia.join(', ')
+    if (ejecutarStage.findAll { e -> env.instancia.contains( e ) }.size() == 0) {
+        println 'ERROR EN STAGES INGRESADAS: STAGES VALIDAS: ' + ejecutarStage.join(', ') + '. STAGE INGRESADAS: ' + env.instancia.join(', ')
 		return false;
     }
 
