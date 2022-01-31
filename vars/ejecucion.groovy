@@ -20,11 +20,8 @@ def call (){
 
 						if (params.buildTool=='gradle') {
 
-								if(isStageValido(GRADLEPIPELINE)){
-									println "STAGES:: ${env.STAGE}"
-									gradle(env.STAGE)
-								}
-									
+								if(isStageValido(GRADLEPIPELINE))
+									gradle(if(params.STAGES.isEmpty()) GRADLEPIPELINE else params.STAGES)							
 						} else {
 								if(isStageValido(MAVENPIPELINE))
 									maven(env.STAGE)
