@@ -2,7 +2,9 @@ def call(String STAGE){
   
     println STAGE
 
-	if(STAGE.contains('BuildJar'))
+	arraySTAGE = STAGE.split(";");
+
+	if(arraySTAGE.contains('BuildJar'))
 	stage('BuildJar'){
 
 					println "Stage: ${env.STAGE_NAME}"
@@ -11,7 +13,8 @@ def call(String STAGE){
 					sh "./gradlew clean build"
 
 		}
-	if(STAGE.contains('Sonar'))
+
+	if(arraySTAGE.contains('Sonar'))
 		stage('Sonar'){
 
 					println "Stage: ${env.STAGE_NAME}"
@@ -22,7 +25,7 @@ def call(String STAGE){
 					    }
 		}
 		
-		if(STAGE.contains('run'))
+		if(arraySTAGE.contains('run'))
 		stage('run'){
 
 					println "Stage: ${env.STAGE_NAME}"
@@ -32,7 +35,7 @@ def call(String STAGE){
 
 		}
 
-		if(STAGE.contains('Test'))
+		if(arraySTAGE.contains('Test'))
 		stage('Test'){
 
 			println "Stage: ${env.STAGE_NAME}"
@@ -41,7 +44,7 @@ def call(String STAGE){
 
 		}
 
-		if(STAGE.contains('Nexus'))
+		if(arraySTAGE.contains('Nexus'))
 		stage('Nexus'){
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
