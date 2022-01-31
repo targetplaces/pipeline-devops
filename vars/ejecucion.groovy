@@ -56,7 +56,7 @@ def isStageValido(pipeline){
 		instancia = params.STAGES.split(";");
 
     if (ejecutarStage.findAll { e -> instancia.contains( e ) }.size() == 0) {
-        throw new Exception('Al menos una stage es inválida. Stages válidas: ' + ejecutarStage.join(', ') + '. Recibe: ' + instancia.join(', '))
+        println 'Al menos una stage es inválida. Stages válidas: ' + ejecutarStage.join(', ') + '. Recibe: ' + instancia.join(', ')
 		return false
     }
 	/*		
