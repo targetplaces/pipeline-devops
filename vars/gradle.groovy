@@ -2,7 +2,7 @@ def call(String STAGE){
   
   figlet STAGE
   
-	if(STAGE.contains('BuildTestJar'))
+	if(STAGE.contains('BuildJar'))
 	stage('BuildTestJar'){
 
 					println "Stage: ${env.STAGE_NAME}"
