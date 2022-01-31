@@ -20,8 +20,11 @@ def call (){
 
 						if (params.buildTool=='gradle') {
 
-								if(isStageValido(GRADLEPIPELINE))
+								if(isStageValido(GRADLEPIPELINE)){
+									println "STAGES:: ${env.STAGE}"
 									gradle(env.STAGE)
+								}
+									
 						} else {
 								if(isStageValido(MAVENPIPELINE))
 									maven(env.STAGE)
@@ -56,8 +59,6 @@ def isStageValido(pipeline){
 	else
 		instancia = params.STAGES.split(";");
 
-	println "STAGES:"
-	println instancia
 
     if (ejecutarStage.findAll { e -> instancia.contains( e ) }.size() == 0) {
         println 'ERROR EN STAGES INGRESADAS: STAGES VALIDAS: ' + ejecutarStage.join(', ') + '. STAGE INGRESADAS: ' + instancia.join(', ')
