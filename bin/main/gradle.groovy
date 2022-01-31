@@ -1,6 +1,6 @@
 def call(String STAGE){
   
-  figlet STAGE
+    println STAGE
   
 	if(STAGE.contains('BuildJar'))
 	stage('BuildJar'){
