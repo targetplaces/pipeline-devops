@@ -49,15 +49,15 @@ def isStageValido(pipeline){
 
 	println "Ejecutando funcion: isStageValido"
 	if (params.STAGES.isEmpty())
-		instancia = pipeline.split(';')
+		instancia = pipeline
 	else
-		instancia = params.STAGES.split(';')
+		instancia = params.STAGES
 
     def estado = true
 
 			pipeline.tokenize(";").each { paramStage ->
 			println paramStage
-						instancia.tokenize(";").each { stage ->
+						  instancia.tokenize(";").each { stage ->
 							if(!stage.equals(paramStage)){
 								println "NO EXISTE STAGE: ${stage}"
 								estado = false
