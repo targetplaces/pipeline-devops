@@ -45,11 +45,13 @@ def call (){
 
 def isStageValido(pipeline){
 	
+	String[] instancia = []
+
 	println "Ejecutando funcion: isStageValido"
 	if (params.STAGES.isEmpty())
-		String[] instancia = pipeline.split(';')
+		instancia = pipeline.split(';')
 	else
-		String[] instancia = params.STAGES.split(';')
+		instancia = params.STAGES.split(';')
 
     def estado = true
 	println instancia
