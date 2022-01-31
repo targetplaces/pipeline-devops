@@ -2,20 +2,18 @@ def call(String STAGE){
   
   figlet STAGE
   
+	if(STAGE.contains('BuildTestJar'))
 	stage('BuildTestJar'){
-            when {
-                expression { return STAGE.contains('BuildTestJar') }
-            	}
+
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					sh "chmod +x gradlew"
 					sh "./gradlew clean build"
 
 		}
+	if(STAGE.contains('Sonar'))
 		stage('Sonar'){
-			     when {
-                	expression { STAGE.contains('Sonar') }
-           		 }
+
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					    def scannerHome = tool 'sonar-scanner';
@@ -23,30 +21,28 @@ def call(String STAGE){
 						sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.sources=src -Dsonar.java.binaries=build"
 					    }
 		}
+		
+		if(STAGE.contains('run'))
 		stage('run'){
-			     when {
-                	expression { STAGE.contains('run') }
-           		 }
+
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					sh "nohup bash gradlew bootRun &"
 					sleep 20
 
 		}
-		stage('Test'){
-					when {
-                		expression { STAGE.contains('Test') }
-           			 }
 
-					println "Stage: ${env.STAGE_NAME}"
-					STAGE = env.STAGE_NAME
-					sh "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
+		if(STAGE.contains('Test'))
+		stage('Test'){
+
+			println "Stage: ${env.STAGE_NAME}"
+			STAGE = env.STAGE_NAME
+			sh "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
 
 		}
+
+		if(STAGE.contains('Nexus'))
 		stage('Nexus'){
-					when {
-                		expression { STAGE.contains('Nexus') }
-           			 }
 					println "Stage: ${env.STAGE_NAME}"
 					STAGE = env.STAGE_NAME
 					nexusPublisher nexusInstanceId: 'nexus',
