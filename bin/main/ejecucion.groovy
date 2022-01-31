@@ -6,7 +6,7 @@ def call (){
 			STAGE = ''
 			GRADLEPIPELINE = "BuildJar;Sonar;run;Nexus"
 			MAVENPIPELINE = "Build;Sonar;run;Nexus"
-			String[] instancia = []
+			instancia = []
 		}
 
 		parameters {
