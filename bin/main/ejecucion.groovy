@@ -48,7 +48,6 @@ def isStageValido(pipeline){
 	String[] instancia = []
 	String [] ejecutarStage = pipeline.split(";");
 
-	println "Ejecutando funcion: isStageValido"
 	if (params.STAGES.isEmpty()){
 		instancia = pipeline.split(";");
 	}
@@ -56,24 +55,10 @@ def isStageValido(pipeline){
 		instancia = params.STAGES.split(";");
 
     if (ejecutarStage.findAll { e -> instancia.contains( e ) }.size() == 0) {
-        println 'Al menos una stage es inválida. Stages válidas: ' + ejecutarStage.join(', ') + '. Recibe: ' + instancia.join(', ')
+        println 'ERROR EN STAGES INGRESADAS: STAGES VALIDAS: ' + ejecutarStage.join(', ') + '. STAGE INGRESADAS: ' + instancia.join(', ')
 		return false
     }
-	/*		
-	instancia.tokenize(";").each { paramStage ->
-	println paramStage
-		estado = false		    
-		pipeline.tokenize(";").each { stage ->
-			if(stage.equals(paramStage)){
-				estado = true
-				println "Existe Stage: ${stage}"
-			}	
-		}
-		if(!estado) return
-	}
 
-	return estado;
-	*/
 	return true
 	}
 
