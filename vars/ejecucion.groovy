@@ -72,7 +72,8 @@ def isStageValido(pipeline){
 	}
 
 	return estado;
+	*/
 	}
-*/
+
 
 return this;
