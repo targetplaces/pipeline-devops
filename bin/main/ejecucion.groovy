@@ -56,7 +56,7 @@ def isStageValido(pipeline){
     def estado = true
 
 			pipeline.tokenize(";").each { paramStage ->
-		
+			println paramStage
 						instancia.tokenize(";").each { stage ->
 							if(!stage.equals(paramStage)){
 								println "NO EXISTE STAGE: ${stage}"
