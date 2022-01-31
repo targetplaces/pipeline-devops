@@ -60,7 +60,7 @@ def isStageValido(pipeline){
 		return false;
     }
 
-	return 0
+	return true
 	}
 
 
