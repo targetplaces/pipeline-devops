@@ -4,7 +4,7 @@ def call (){
 		
 		environment {
 			STAGE = ''
-			GRADLEPIPELINE = "BuildTestJar;Sonar;run;Nexus"
+			GRADLEPIPELINE = "BuildJar;Sonar;run;Nexus"
 			MAVENPIPELINE = "Build;Sonar;run;Nexus"
 		}
 
